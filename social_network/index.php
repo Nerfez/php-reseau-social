@@ -74,7 +74,8 @@
 
                         <form action="add_comment.php" method="post">
                             <div class="form-group">
-                                <textarea name="comment" class="form-control" placeholder="Ajouter un commentaire"></textarea>
+                                <textarea name="contentComment" id="contentComment" class="form-control" maxlength="255" oninput="updateCharacterCount()"></textarea>
+                                <small id="characterCount" class="form-text text-muted">0 / 255 caractères</small>
                                 <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                             </div>
                             <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
@@ -88,5 +89,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updateCharacterCount() {
+        var textarea = document.getElementById('contentComment');
+        var characterCountElement = document.getElementById('characterCount');
+        var characterCount = textarea.value.length;
+        characterCountElement.textContent = characterCount + ' / 255 caractères';
+    }
+</script>
 
 <?php require_once './templates/footer.php'; ?>
